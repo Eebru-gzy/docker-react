@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    stdin_open: true
+#making a container to for test, while mounting toaccept changes Doesn't interact with terminal
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+    stdin_open: true
+    command: ["npm", "run", "test"]
